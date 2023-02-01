@@ -14,29 +14,10 @@ import tableData from "../mockData/MOCK_DATA.json";
 
 interface DataTableProps {
   searchQuery?: any;
+  apiData?: any;
 }
-const DataTable = ({ searchQuery }: DataTableProps) => {
-  const [apiDataState, setApiDataState] = useState<any>([]);
-  // const [filteredDataState, setFilteredDataState] = useState<any>([]);
-  //get random number between two integers
-  const duration = [2000, 3000, 4000, 6000];
-
-  const getRandomNumber = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
-
-  useEffect(() => {
-    const response = new Promise((res, rej) => {
-      setTimeout(() => {
-        res(tableData);
-      }, duration[getRandomNumber(0, 3)]);
-    });
-    response.then((data) => {
-      setApiDataState(data);
-    });
-  }, []);
-
-  const filteredArray = apiDataState?.filter((data: any) => {
+const DataTable = ({ searchQuery, apiData }: DataTableProps) => {
+  const filteredArray = apiData?.filter((data: any) => {
     const queries = searchQuery.split(",");
 
     return queries.some((item: string) => {
