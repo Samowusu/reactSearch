@@ -1,6 +1,4 @@
-import { Console } from "console";
-import { title } from "process";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CheckedBox from "../../assets/svgs/CheckedBox";
 import UncheckedBox from "../../assets/svgs/UncheckedBox";
 import { Container } from "./Container";
@@ -18,11 +16,19 @@ const BoxIcon = ({ val }: { val: boolean }) => {
 const BoxItem = ({
   title,
   onCheck,
+  value,
 }: {
   title: string;
   onCheck: (val: string) => void;
+  value: boolean;
 }) => {
   const [checkedState, setCheckedState] = useState(false);
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setCheckedState(value);
+    }
+  }, [value]);
 
   const checkBoxHandler = (title: string) => {
     setCheckedState((prevState) => !prevState);
@@ -63,6 +69,11 @@ const CheckBoxComponent = ({
     } else {
       setCheckedItemsState((prevState) => {
         const selectedArr = [...prevState];
+        const showAllIndex = selectedArr.indexOf("Show all");
+        if (showAllIndex !== -1) {
+          selectedArr.splice(showAllIndex, 1);
+        }
+
         const typeIndex = selectedArr.indexOf(item);
         if (typeIndex === -1) {
           return [...selectedArr, item];
@@ -73,13 +84,17 @@ const CheckBoxComponent = ({
     }
   };
 
-  console.log({ checkedItemsState });
   return (
     <Container>
       <Container flexDirection="column" gap="15px">
         {options?.map((item, index) => {
           return (
-            <BoxItem key={index} title={item} onCheck={handleCheckedItems} />
+            <BoxItem
+              key={index}
+              value={checkedItemsState.some((i) => i === item)}
+              title={item}
+              onCheck={handleCheckedItems}
+            />
           );
         })}
       </Container>

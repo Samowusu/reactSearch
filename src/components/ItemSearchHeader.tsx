@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import AddIcon from "../assets/svgs/AddIcon";
 import BookmarkIcon from "../assets/svgs/BookmarkIcon";
 import MenuIcon from "../assets/svgs/MenuIcon";
@@ -12,19 +12,21 @@ interface ItemSearchHeaderProps {
   setSearchQuery?: (event: string) => void;
   onFetchData?: () => void;
   searchQuery?: string;
+  numberOfFilteredItems: number;
 }
 const ItemSearchHeader = ({
   onFilter,
   setSearchQuery,
   onFetchData,
+  numberOfFilteredItems,
 }: ItemSearchHeaderProps) => {
   const searchInputRef = useRef<any>(null);
 
-  const handleSearch = (event: string) => {
+  const handleSearch = (query: string) => {
     searchInputRef?.current && clearTimeout(searchInputRef.current);
 
     searchInputRef.current = setTimeout(() => {
-      setSearchQuery?.(event);
+      setSearchQuery?.(query);
     }, 1000);
     onFetchData?.();
   };
@@ -36,7 +38,7 @@ const ItemSearchHeader = ({
           Item search
         </Typography>
         <Typography fontSize="12px" color="#778FAB">
-          0 items
+          {numberOfFilteredItems} items
         </Typography>
       </Container>
       <Container justifyContent="flex-end" gap="20px">

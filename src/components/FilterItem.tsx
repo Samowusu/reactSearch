@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DropDownIcon from "../assets/svgs/DropDownIcon";
 import DropUpIcon from "../assets/svgs/DropUpIcon";
 import { Button } from "./commons/Button";
@@ -22,7 +22,7 @@ const FilterItem = ({
   title = "Order #",
   onChangeTextArea,
   name = "order",
-  placeholder = "Order ID (Ex. “673444444383”)",
+  placeholder = "Order ID (Ex. “673444”)",
 }: FilterItemProps) => {
   const [showDropDownMenuState, setShowDropDownMenuState] = useState(false);
   const [textAreaInputState, setTextAreaInputState] = useState<string>("");
@@ -88,7 +88,7 @@ const FilterItem = ({
                 padding: "5px",
                 border: "1px solid #E9EEF1",
                 width: "100%",
-                minHeight: "100px",
+                minHeight: "70px",
               }}
               placeholder={placeholder}
               value={textAreaInputState}

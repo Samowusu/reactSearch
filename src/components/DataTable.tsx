@@ -1,54 +1,14 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useMemo,
-  useCallback,
-} from "react";
 import { Container } from "./commons/Container";
-import { AgGridReact } from "ag-grid-react"; // the AG Grid React Component
+import { AgGridReact } from "ag-grid-react";
 
-import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
-import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
-import tableData from "../mockData/MOCK_DATA.json";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import { ApiData } from "../App";
 
 interface DataTableProps {
-  searchQuery?: any;
+  data: ApiData[];
 }
-const DataTable = ({ searchQuery }: DataTableProps) => {
-  const [apiDataState, setApiDataState] = useState<any>([]);
-  // const [filteredDataState, setFilteredDataState] = useState<any>([]);
-  //get random number between two integers
-  const duration = [2000, 3000, 4000, 6000];
-
-  const getRandomNumber = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
-
-  useEffect(() => {
-    const response = new Promise((res, rej) => {
-      setTimeout(() => {
-        res(tableData);
-      }, duration[getRandomNumber(0, 3)]);
-    });
-    response.then((data) => {
-      setApiDataState(data);
-    });
-  }, []);
-
-  const filteredArray = apiDataState?.filter((data: any) => {
-    const queries = searchQuery.split(",");
-
-    return queries.some((item: string) => {
-      return (
-        ` ${data.order_number}`
-          .toLowerCase()
-          .includes(item.trim().toLowerCase()) ||
-        ` ${data.item}`.toLowerCase().includes(item.trim().toLowerCase())
-      );
-    });
-  });
-
+const DataTable = ({ data }: DataTableProps) => {
   const columns = [
     { field: "id", sortable: true },
     { field: "order_number", sortable: true },
@@ -64,7 +24,7 @@ const DataTable = ({ searchQuery }: DataTableProps) => {
         style={{ width: "100%", height: "100%" }}
       >
         <AgGridReact
-          rowData={filteredArray}
+          rowData={data}
           columnDefs={columns}
           pagination
           paginationPageSize={20}

@@ -1,13 +1,13 @@
-import React from "react";
 import { Button } from "./commons/Button";
 import { Container } from "./commons/Container";
 import { Typography } from "./commons/Typography";
 
 interface FetchDataProps {
   onFetchData?: () => void;
+  loading?: boolean;
 }
 
-const FetchData = ({ onFetchData }: FetchDataProps) => {
+const FetchData = ({ onFetchData, loading }: FetchDataProps) => {
   return (
     <Container height="100%">
       <Container
@@ -31,23 +31,23 @@ const FetchData = ({ onFetchData }: FetchDataProps) => {
           onClick={onFetchData}
         >
           <Typography fontSize="12px" color="#fff" fontWeight="500">
-            Fetch Data
+            {loading ? "loading.." : "Fetch Data"}
           </Typography>
         </Button>
         <Container justifyContent="center" gap="10px">
           <Typography fontSize="12px" color="#778FAB" textTransform="lowercase">
             or
           </Typography>
-          <Button>
-            <Typography
-              fontSize="12px"
-              color="#0C67A0"
-              fontWeight="500"
-              textTransform="lowercase"
-            >
-              search for an item
-            </Typography>
-          </Button>
+          {/* <Button> */}
+          <Typography
+            fontSize="12px"
+            color="#0C67A0"
+            fontWeight="500"
+            textTransform="lowercase"
+          >
+            search for an item
+          </Typography>
+          {/* </Button> */}
         </Container>
       </Container>
     </Container>

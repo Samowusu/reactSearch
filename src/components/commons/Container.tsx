@@ -51,24 +51,13 @@ const Box = styled.div<StyleProps>`
   & ::-webkit-scrollbar {
     display: none;
   }
-  /* box-shadow: ${({ boxShadow }) =>
-    boxShadow ? "-11px -8px 9px 0px rgba(168, 172, 176, 0.19)" : ""};
-  -webkit-box-shadow: ${({ boxShadow }) =>
-    boxShadow ? "-11px -8px 9px 0px rgba(168, 172, 176, 0.19)" : ""};
-  -moz-box-shadow: ${({ boxShadow }) =>
-    boxShadow ? "-11px -8px 9px 0px rgba(168, 172, 176, 0.19)" : ""}; */
-  /* box-shadow: -11px -8px 9px 0px rgba(168, 172, 176, 0.19);
-  -webkit-box-shadow: -11px -8px 9px 0px rgba(168, 172, 176, 0.19);
-  -moz-box-shadow: -11px -8px 9px 0px rgba(168, 172, 176, 0.19); */
+
   box-shadow: ${({ boxShadow }) =>
     boxShadow && "0px 3px 6px  rgba(0, 0, 0, 0.161)"};
   -webkit-box-shadow: ${({ boxShadow }) =>
     boxShadow && "0px 3px 6px  rgba(0, 0, 0, 0.161)"};
   -moz-box-shadow: ${({ boxShadow }) =>
     boxShadow && "0px 3px 6px  rgba(0, 0, 0, 0.161)"};
-  /* box-shadow: 6px 14px 0px -5px rgba(0, 0, 0, 1);
-  -webkit-box-shadow: 6px 14px 0px -5px rgba(0, 0, 0, 1);
-  -moz-box-shadow: 6px 14px 0px -5px rgba(0, 0, 0, 1); */
 
   ${({ hover }) =>
     hover ? `&:hover { background: #064A71 ; cursor: pointer}` : ""}

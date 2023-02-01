@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-
 import { Container } from "./commons/Container";
-import { Typography } from "./commons/Typography";
 import logo from "../assets/images/logo.png";
 import ListItem from "./ListItem";
 import { SIDE_PANEL_FOOTER_MENU } from "../config/utils";
